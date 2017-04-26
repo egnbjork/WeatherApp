@@ -71,15 +71,111 @@
 		38725E5C1EAF869100E2D2E3 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				38725E6C1EAF869100E2D2E3 /* Info.plist */,
 				38725E5D1EAF869100E2D2E3 /* AppDelegate.swift */,
 				38725E5F1EAF869100E2D2E3 /* ViewController.swift */,
-				38725E611EAF869100E2D2E3 /* Main.storyboard */,
 				38725E671EAF869100E2D2E3 /* Assets.xcassets */,
+				38C9A6C31EB0EBB60036BC2C /* Business */,
+				38C9A6C51EB0EBDD0036BC2C /* Data */,
+				38C9A6C91EB0EC010036BC2C /* Extensions */,
 				38725E691EAF869100E2D2E3 /* LaunchScreen.storyboard */,
-				38725E6C1EAF869100E2D2E3 /* Info.plist */,
+				38725E611EAF869100E2D2E3 /* Main.storyboard */,
+				38C9A6CA1EB0EC1A0036BC2C /* Presentation */,
+				38C9A6CE1EB0EC500036BC2C /* Protocols */,
 				38ADA5651EB08D9700C85A90 /* WeatherApp.xcdatamodeld */,
 			);
 			path = WeatherApp;
+			sourceTree = "<group>";
+		};
+		38C9A6C31EB0EBB60036BC2C /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				38C9A6C41EB0EBCC0036BC2C /* Services */,
+			);
+			name = Business;
+			sourceTree = "<group>";
+		};
+		38C9A6C41EB0EBCC0036BC2C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		38C9A6C51EB0EBDD0036BC2C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				38C9A6C81EB0EBEC0036BC2C /* Network */,
+				38C9A6C71EB0EBE70036BC2C /* Model */,
+				38C9A6C61EB0EBE20036BC2C /* Database */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		38C9A6C61EB0EBE20036BC2C /* Database */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		38C9A6C71EB0EBE70036BC2C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		38C9A6C81EB0EBEC0036BC2C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		38C9A6C91EB0EC010036BC2C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		38C9A6CA1EB0EC1A0036BC2C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				38C9A6CD1EB0EC420036BC2C /* Xibs */,
+				38C9A6CC1EB0EC330036BC2C /* ViewControllers */,
+				38C9A6CB1EB0EC260036BC2C /* Screens */,
+			);
+			name = Presentation;
+			sourceTree = "<group>";
+		};
+		38C9A6CB1EB0EC260036BC2C /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Screens;
+			sourceTree = "<group>";
+		};
+		38C9A6CC1EB0EC330036BC2C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		38C9A6CD1EB0EC420036BC2C /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Xibs;
+			sourceTree = "<group>";
+		};
+		38C9A6CE1EB0EC500036BC2C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		5749F2D69FA558AFF82B915C /* Pods */ = {
