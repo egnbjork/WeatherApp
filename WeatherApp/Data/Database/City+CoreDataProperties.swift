@@ -16,11 +16,11 @@ extension City {
         return NSFetchRequest<City>(entityName: "City")
     }
 
-    @NSManaged public var country_code: String?
+    @NSManaged public var country_code: String
     @NSManaged public var id: Int64
     @NSManaged public var latitude: Double
     @NSManaged public var longtitude: Double
-    @NSManaged public var name: String?
-    @NSManaged public var user: User?
+    @NSManaged public var name: String
+    @NSManaged public var user: User
 
 }

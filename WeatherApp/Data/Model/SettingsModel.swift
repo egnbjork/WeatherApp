@@ -15,6 +15,9 @@ public class SettingsModel {
     var isCelcius = false
     var nightMode = false
     var weatherReview = false
-    var extremeWeather: ExtremeWeatherModel?
+    var extremeWeather: ExtremeWeatherModel
     
+    init (extremeWeather: ExtremeWeatherModel){
+        self.extremeWeather = extremeWeather
+    }
 }

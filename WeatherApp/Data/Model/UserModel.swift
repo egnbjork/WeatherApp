@@ -9,9 +9,14 @@
 import Foundation
 
 public class UserModel {
-    var login: String?
-    var password: String?
+    var login: String
+    var password: String
     var cities: [City]?
-    var settings: SettingsModel?
+    var settings: SettingsModel
     
+    init (user: User, settings: SettingsModel) {
+        self.login = user.login
+        self.password = user.password
+        self.settings = settings
+    }
 }
