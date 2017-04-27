@@ -120,6 +120,20 @@
 		38C9A6C31EB0EBB60036BC2C /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				38FCA8DF1EB1CAA9005F6F0E /* BestWeatherCityList */,
+				38FCA8DC1EB1CA85005F6F0E /* CityListCompareWeather */,
+				38FCA8D91EB1CA55005F6F0E /* CityListWeather */,
+				38FCA8D61EB1CA2F005F6F0E /* CityListForecast */,
+				38FCA8D31EB1CA0D005F6F0E /* CustomNotifications */,
+				38FCA8D01EB1C9EC005F6F0E /* NightMode */,
+				38FCA8CD1EB1C9C2005F6F0E /* ForecastCustomCity */,
+				38FCA8CA1EB1C997005F6F0E /* WeatherCustomCity */,
+				38FCA8C71EB1C96F005F6F0E /* BadWeatherNotifications */,
+				38FCA8C41EB1C93B005F6F0E /* CustomiseScreen */,
+				38FCA8C11EB1C8EF005F6F0E /* WeatherPicture */,
+				38FCA8BE1EB1C84F005F6F0E /* TemperatureConvertion */,
+				38FCA8BB1EB1C805005F6F0E /* LocationForecastCheck */,
+				38FCA8B81EB1C7D7005F6F0E /* LocationWeatherCheck */,
 				38C9A6C41EB0EBCC0036BC2C /* Services */,
 			);
 			name = Business;
@@ -135,6 +149,20 @@
 		38C9A6C51EB0EBDD0036BC2C /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				38FCA8E01EB1CAAE005F6F0E /* BestWeatherCityList */,
+				38FCA8DD1EB1CA8B005F6F0E /* CityListCompareWeather */,
+				38FCA8DA1EB1CA59005F6F0E /* CityListWeather */,
+				38FCA8D71EB1CA33005F6F0E /* CityListForecast */,
+				38FCA8D41EB1CA12005F6F0E /* CustomNotifications */,
+				38FCA8D11EB1C9F0005F6F0E /* NightMode */,
+				38FCA8CE1EB1C9C8005F6F0E /* ForecastCustomCity */,
+				38FCA8CB1EB1C99D005F6F0E /* WeatherCustomCity */,
+				38FCA8C81EB1C975005F6F0E /* BadWeatherNotifications */,
+				38FCA8C51EB1C941005F6F0E /* CustomiseScreen */,
+				38FCA8C21EB1C8FD005F6F0E /* WeatherPicture */,
+				38FCA8BF1EB1C895005F6F0E /* TemperatureConvertion */,
+				38FCA8BC1EB1C810005F6F0E /* LocationForecastCheck */,
+				38FCA8B91EB1C7E5005F6F0E /* LocationWeatherCheck */,
 				38C9A6C81EB0EBEC0036BC2C /* Network */,
 				38C9A6C71EB0EBE70036BC2C /* Model */,
 				38C9A6C61EB0EBE20036BC2C /* Database */,
@@ -188,6 +216,20 @@
 		38C9A6CA1EB0EC1A0036BC2C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				38FCA8E11EB1CAB4005F6F0E /* BestWeatherCityList */,
+				38FCA8DE1EB1CA8F005F6F0E /* CityListCompareWeather */,
+				38FCA8DB1EB1CA5F005F6F0E /* CityListWeather */,
+				38FCA8D81EB1CA39005F6F0E /* CityListForecast */,
+				38FCA8D51EB1CA16005F6F0E /* CustomNotifications */,
+				38FCA8D21EB1C9F6005F6F0E /* NightMode */,
+				38FCA8CF1EB1C9CD005F6F0E /* ForecastCustomCity */,
+				38FCA8CC1EB1C9A4005F6F0E /* WeatherCustomCity */,
+				38FCA8C91EB1C97A005F6F0E /* BadWeatherNotifications */,
+				38FCA8C61EB1C946005F6F0E /* CustomiseScreen */,
+				38FCA8C31EB1C907005F6F0E /* WeatherPicture */,
+				38FCA8C01EB1C8A5005F6F0E /* TemperatureConvertion */,
+				38FCA8BD1EB1C819005F6F0E /* LocationForecastCheck */,
+				38FCA8BA1EB1C7F0005F6F0E /* LocationWeatherCheck */,
 				38C9A6CD1EB0EC420036BC2C /* Xibs */,
 				38C9A6CC1EB0EC330036BC2C /* ViewControllers */,
 				38C9A6CB1EB0EC260036BC2C /* Screens */,
@@ -221,6 +263,300 @@
 			children = (
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		38FCA8B81EB1C7D7005F6F0E /* LocationWeatherCheck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LocationWeatherCheck;
+			sourceTree = "<group>";
+		};
+		38FCA8B91EB1C7E5005F6F0E /* LocationWeatherCheck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LocationWeatherCheck;
+			sourceTree = "<group>";
+		};
+		38FCA8BA1EB1C7F0005F6F0E /* LocationWeatherCheck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LocationWeatherCheck;
+			sourceTree = "<group>";
+		};
+		38FCA8BB1EB1C805005F6F0E /* LocationForecastCheck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LocationForecastCheck;
+			sourceTree = "<group>";
+		};
+		38FCA8BC1EB1C810005F6F0E /* LocationForecastCheck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LocationForecastCheck;
+			sourceTree = "<group>";
+		};
+		38FCA8BD1EB1C819005F6F0E /* LocationForecastCheck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LocationForecastCheck;
+			sourceTree = "<group>";
+		};
+		38FCA8BE1EB1C84F005F6F0E /* TemperatureConvertion */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TemperatureConvertion;
+			sourceTree = "<group>";
+		};
+		38FCA8BF1EB1C895005F6F0E /* TemperatureConvertion */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TemperatureConvertion;
+			sourceTree = "<group>";
+		};
+		38FCA8C01EB1C8A5005F6F0E /* TemperatureConvertion */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TemperatureConvertion;
+			sourceTree = "<group>";
+		};
+		38FCA8C11EB1C8EF005F6F0E /* WeatherPicture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = WeatherPicture;
+			sourceTree = "<group>";
+		};
+		38FCA8C21EB1C8FD005F6F0E /* WeatherPicture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = WeatherPicture;
+			sourceTree = "<group>";
+		};
+		38FCA8C31EB1C907005F6F0E /* WeatherPicture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = WeatherPicture;
+			sourceTree = "<group>";
+		};
+		38FCA8C41EB1C93B005F6F0E /* CustomiseScreen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomiseScreen;
+			sourceTree = "<group>";
+		};
+		38FCA8C51EB1C941005F6F0E /* CustomiseScreen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomiseScreen;
+			sourceTree = "<group>";
+		};
+		38FCA8C61EB1C946005F6F0E /* CustomiseScreen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomiseScreen;
+			sourceTree = "<group>";
+		};
+		38FCA8C71EB1C96F005F6F0E /* BadWeatherNotifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = BadWeatherNotifications;
+			sourceTree = "<group>";
+		};
+		38FCA8C81EB1C975005F6F0E /* BadWeatherNotifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = BadWeatherNotifications;
+			sourceTree = "<group>";
+		};
+		38FCA8C91EB1C97A005F6F0E /* BadWeatherNotifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = BadWeatherNotifications;
+			sourceTree = "<group>";
+		};
+		38FCA8CA1EB1C997005F6F0E /* WeatherCustomCity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = WeatherCustomCity;
+			sourceTree = "<group>";
+		};
+		38FCA8CB1EB1C99D005F6F0E /* WeatherCustomCity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = WeatherCustomCity;
+			sourceTree = "<group>";
+		};
+		38FCA8CC1EB1C9A4005F6F0E /* WeatherCustomCity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = WeatherCustomCity;
+			sourceTree = "<group>";
+		};
+		38FCA8CD1EB1C9C2005F6F0E /* ForecastCustomCity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ForecastCustomCity;
+			sourceTree = "<group>";
+		};
+		38FCA8CE1EB1C9C8005F6F0E /* ForecastCustomCity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ForecastCustomCity;
+			sourceTree = "<group>";
+		};
+		38FCA8CF1EB1C9CD005F6F0E /* ForecastCustomCity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ForecastCustomCity;
+			sourceTree = "<group>";
+		};
+		38FCA8D01EB1C9EC005F6F0E /* NightMode */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NightMode;
+			sourceTree = "<group>";
+		};
+		38FCA8D11EB1C9F0005F6F0E /* NightMode */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NightMode;
+			sourceTree = "<group>";
+		};
+		38FCA8D21EB1C9F6005F6F0E /* NightMode */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NightMode;
+			sourceTree = "<group>";
+		};
+		38FCA8D31EB1CA0D005F6F0E /* CustomNotifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomNotifications;
+			sourceTree = "<group>";
+		};
+		38FCA8D41EB1CA12005F6F0E /* CustomNotifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomNotifications;
+			sourceTree = "<group>";
+		};
+		38FCA8D51EB1CA16005F6F0E /* CustomNotifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomNotifications;
+			sourceTree = "<group>";
+		};
+		38FCA8D61EB1CA2F005F6F0E /* CityListForecast */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CityListForecast;
+			sourceTree = "<group>";
+		};
+		38FCA8D71EB1CA33005F6F0E /* CityListForecast */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CityListForecast;
+			sourceTree = "<group>";
+		};
+		38FCA8D81EB1CA39005F6F0E /* CityListForecast */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CityListForecast;
+			sourceTree = "<group>";
+		};
+		38FCA8D91EB1CA55005F6F0E /* CityListWeather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CityListWeather;
+			sourceTree = "<group>";
+		};
+		38FCA8DA1EB1CA59005F6F0E /* CityListWeather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CityListWeather;
+			sourceTree = "<group>";
+		};
+		38FCA8DB1EB1CA5F005F6F0E /* CityListWeather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CityListWeather;
+			sourceTree = "<group>";
+		};
+		38FCA8DC1EB1CA85005F6F0E /* CityListCompareWeather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CityListCompareWeather;
+			sourceTree = "<group>";
+		};
+		38FCA8DD1EB1CA8B005F6F0E /* CityListCompareWeather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CityListCompareWeather;
+			sourceTree = "<group>";
+		};
+		38FCA8DE1EB1CA8F005F6F0E /* CityListCompareWeather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CityListCompareWeather;
+			sourceTree = "<group>";
+		};
+		38FCA8DF1EB1CAA9005F6F0E /* BestWeatherCityList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = BestWeatherCityList;
+			sourceTree = "<group>";
+		};
+		38FCA8E01EB1CAAE005F6F0E /* BestWeatherCityList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = BestWeatherCityList;
+			sourceTree = "<group>";
+		};
+		38FCA8E11EB1CAB4005F6F0E /* BestWeatherCityList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = BestWeatherCityList;
 			sourceTree = "<group>";
 		};
 		5749F2D69FA558AFF82B915C /* Pods */ = {

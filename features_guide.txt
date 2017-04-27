@@ -1,0 +1,41 @@
+as a user I should have an option to check current weather based on my location
+LocationWeatherCheck
+
+as a user I should have an option to check weather forecast based on my location
+LocationForecastCheck
+
+as a user I can switch between C° and F°
+TemperatureConvertion
+
+as a user I will see a picture representing current weather of the city I am located / preferred location
+WeatherPicture
+
+as a user I should have an option to choose what weather info I am interested to see on screen
+CustomiseScreen
+
+as a user I should have an option to be notified of bad weather
+BadWeatherNotifications
+
+as a user I should have possibility to check current weather in the city I’ve chosen
+WeatherCustomCity
+
+as a user I should have possibility to check weather forecast of the city I’ve chosen
+ForecastCustomCity
+
+as a user I will experience change of app color scheme based on sunset/sunrise time
+NightMode
+
+as a user I can register in the system so I can get notified when temperature/ sunset/ sunrise/ wind meter of present/ preferred location will reach certain limit
+CustomNotifications
+
+as a user I can register in the system so I will receive info with weather forecast of the cities I’ve chosen
+CityListForecast
+
+as a user I can register in the system so I will compare current weather in different cities
+CityListWeather
+
+as a user I can register in the system so I will compare weather forecast in different cities
+CityListCompareWeather
+
+as a user I can register in the system so I will receive info on where weather was better based on the cities I’ve chosen, get general weather history for a period of time
+BestWeatherCityList
