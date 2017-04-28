@@ -15,7 +15,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         let openWeatherURL = OpenWeatherURL()
         let requestHandler = OpenWeatherRequestHandler(url: openWeatherURL)
-        print(requestHandler.getRawResponse())
+        let parser = WeatherParser()
+        let parseClosure = parser.currentWeather
+        var weather = requestHandler.getRawResponse(parser: parseClosure)
+        print(weather[0])
     }
 
     override func didReceiveMemoryWarning() {

@@ -14,7 +14,6 @@ public class Weather {
     var description: String?
     var base: String?
     var pressure: Double?
-    
     var humidity: Int?
     var visibility: Int?
     var clouds: Int?
@@ -23,12 +22,5 @@ public class Weather {
     var sunset: Date?
     var wind: Wind?
     var temperature: Temperature?
-    
-    init(dict: Dictionary<String, String>) {
-        self.main = dict["main"]
-        self.name = dict["name"]
-        self.description = dict["description"]
-        self.base = dict["base"]
-        self.pressure = Double(pressure!)
-    }
+//    var city:City? //not implemented
 }
