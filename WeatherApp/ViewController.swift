@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let openWeatherURL = OpenWeatherURL()
+        let requestHandler = OpenWeatherRequestHandler(url: openWeatherURL)
+        print(requestHandler.getRawResponse())
     }
 
     override func didReceiveMemoryWarning() {
