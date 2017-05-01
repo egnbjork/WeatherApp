@@ -12,7 +12,7 @@ import SwiftyJSON
 class WeatherParser {
     
     var currentWeather = {
-        (_: AnyObject) -> [Weather] in
+        (entry: AnyObject) -> [Weather] in
         let json = JSON(entry)
         var dict:Dictionary<String, JSON> = [:]
         var weatherArr = [Weather]()
