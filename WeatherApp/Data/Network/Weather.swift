@@ -21,6 +21,8 @@ public class Weather {
     var sunrise: Date?
     var sunset: Date?
     var wind: Wind?
-    var temperature: Temperature?
+    var temperature: Double?
+    var temperatureMax: Double?
+    var temperatureMin: Double?
 //    var city:City? //not implemented
 }

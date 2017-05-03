@@ -11,26 +11,29 @@ import Alamofire
 import SwiftyJSON
 
 class OpenWeatherResponseHandler {
-    func getData(url: OpenWeatherURL, parser: @escaping (AnyObject) -> [Weather]) -> [Weather] {
-        print("getData() invoked")
+    
+    var parser: (AnyObject) -> [Weather]
+    
+    init(parser: @escaping (AnyObject) -> [Weather]) {
+        self.parser = parser
+    }
+    
+    func getData(url: OpenWeatherURL, completion:@escaping ([Weather]) -> Void) {
+        print("parser.getData() invoked")
         var data = [Weather]()
         Alamofire.request(url.getURL())
             .responseJSON { response in
                 if let entry = response.result.value {
-//                    print("response is not nil")
-//                    print(entry)
-//                    print("parsed data")
-//                    let json = JSON(entry)
-//                    print("city name: ")
-//                    print(json["name"])
-                    data = parser(entry as AnyObject)
+                    data = self.parser(entry as AnyObject)
                     print("inside the closure data capacity is \(data.capacity)")
+                    data[0].temperature = 15.0 //for debug only
+                    print("temp inside parser is \(data[0].temperature)")
+                    completion(data)
                 }
                 else {
                     print("response is nil")
                 }
         }
         print("data capacity is \(data.capacity)")
-        return data
     }
 }

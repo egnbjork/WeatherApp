@@ -10,12 +10,21 @@ import Foundation
 
 class CurrentWeatherCustomCity {
     
-    func getCurrentWeather() -> Weather {
+    func getCurrentWeather(completion: @escaping (Weather) -> Void ) -> Weather{
         let weatherUrl = OpenWeatherURL()
-        let weatherHandler = OpenWeatherResponseHandler()
-        let weatherParser = WeatherParser().currentWeather
-        let currentWeather = weatherHandler.getData(url: weatherUrl, parser: weatherParser)
-        print(currentWeather.capacity)
-        return currentWeather[0]
+        let currentWeatherParser = WeatherParser().currentWeather
+        var weatherArr:[Weather] = []
+        var currentWeather = Weather()
+        let weatherHandler = OpenWeatherResponseHandler(parser: currentWeatherParser)
+        weatherHandler.getData(url: weatherUrl, completion: {
+            (weatherArr) in
+            print("callback invoked")
+            print("callback capacity is \(weatherArr.capacity)")
+            completion(weatherArr[0])
+            print("temp inside callback is \(currentWeather.temperature)")
+        }
+        )
+        print("temp outside callback is \(currentWeather.temperature)")
+        return currentWeather
     }
 }

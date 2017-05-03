@@ -13,11 +13,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let weatherUrl = OpenWeatherURL()
-        let weatherHandler = OpenWeatherResponseHandler()
-        let weatherParser = WeatherParser().currentWeather
-        let currentWeather = weatherHandler.getData(url: weatherUrl, parser: weatherParser)
-        print("data capacity in view is \(currentWeather.capacity)")
+        let currentWeather = CurrentWeatherCustomCity().getCurrentWeather { (weather) in
+            print("current temp is \(weather.temperature)")
+        }
+//        print("Now is \(String(describing: currentWeather.temperature)) ºC")
     }
 
     override func didReceiveMemoryWarning() {

@@ -22,7 +22,6 @@ class WeatherParser {
             switch key {
             case "name":
                 weather.name = String(describing: value)
-                dict["name"] = value
             case "base":
                 dict["base"] = value
             case "weather":
