@@ -11,26 +11,27 @@ import SwiftyJSON
 
 class WeatherParser {
     
-    var currentWeather = {
-        (entry: AnyObject) -> [Weather] in
+    func currentWeather (entry: AnyObject) -> Weather {
+        print("currentWeather() parser invoked")
         let json = JSON(entry)
         var dict:Dictionary<String, JSON> = [:]
-        var weatherArr = [Weather]()
-        var weather = Weather()
-        
+        let weather = Weather()
+        weather.date = Date()
+        let wind = Wind()
+        //objectmapper
         for (key, value) in json {
             switch key {
             case "name":
                 weather.name = String(describing: value)
             case "base":
-                dict["base"] = value
+                weather.base = String(describing: value)
             case "weather":
                 for (subKey, subValue) in json["weather"][0] {
                     switch subKey {
                     case "main":
-                        dict["main"] = subValue
+                        weather.name = String(describing: subValue)
                     case "description":
-                        dict["description"] = subValue
+                        weather.description = String(describing: subValue)
                     default: break
                     }
                 }
@@ -38,11 +39,12 @@ class WeatherParser {
                 for (subKey, subValue) in json["main"] {
                     switch subKey {
                     case "pressure":
-                        dict["pressure"] = subValue
+                        weather.pressure = Double(String(describing: subValue))
                     case "humidity":
-                        dict["humidity"] = subValue
+                        weather.humidity = Int(String(describing: subValue))
                     case "temp":
-                        dict["temp"] = subValue
+                        weather.temperature = Double(String(describing: subValue))
+                        print("parser temperature is \(String(describing: weather.temperature))")
                     case "temp_min":
                         dict["temp_min"] = subValue
                     case "temp_max":
@@ -51,16 +53,16 @@ class WeatherParser {
                     }
                 }
             case "visibility":
-                dict["visibility"] = value
+                weather.visibility = Int(String(describing: value))
             case "clouds":
-                dict["clouds"] = value["all"]
+                weather.visibility = Int(String(describing: value["all"]))
             case "sys":
                 for (subKey, subValue) in json["sys"] {
                     switch subKey {
                     case "sunrise":
-                        dict["sunrise"] = subValue
+                        weather.sunrise = Date(timeIntervalSince1970: TimeInterval(String(describing: subValue))!)
                     case "sunset":
-                        dict["sunset"] = subValue
+                        weather.sunset = Date(timeIntervalSince1970: TimeInterval(String(describing: subValue))!)
                     default:break
                     }
                 }
@@ -68,16 +70,17 @@ class WeatherParser {
                 for (subKey, subValue) in json["wind"] {
                     switch subKey {
                     case "speed":
-                        dict["windspeed"] = subValue
+                        wind.force = Int(String(describing: subValue))
                     case "deg":
-                        dict["winddeg"] = subValue
+                        wind.direction = String(describing: subValue)
                     default:break
                     }
                 }
             default: break
             }
         }
-        weatherArr.append(weather)
-        return weatherArr
+        
+        //insert wind to weather!!
+        return weather
     }
 }

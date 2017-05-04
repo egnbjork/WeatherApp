@@ -10,21 +10,30 @@ import Foundation
 
 class CurrentWeatherCustomCity {
     
-    func getCurrentWeather(completion: @escaping (Weather) -> Void ) -> Weather{
+    func getCurrentWeather() -> Weather? {
+        print("getCurrentWeather() invoked")
         let weatherUrl = OpenWeatherURL()
-        let currentWeatherParser = WeatherParser().currentWeather
-        var weatherArr:[Weather] = []
-        var currentWeather = Weather()
-        let weatherHandler = OpenWeatherResponseHandler(parser: currentWeatherParser)
-        weatherHandler.getData(url: weatherUrl, completion: {
-            (weatherArr) in
-            print("callback invoked")
-            print("callback capacity is \(weatherArr.capacity)")
-            completion(weatherArr[0])
-            print("temp inside callback is \(currentWeather.temperature)")
+        let weatherParser = WeatherParser()
+        var weather: Weather?
+        var rawData: AnyObject?
+        let weatherQueue = DispatchQueue(label: "com.berberyan.weatherQueue")
+        
+        weatherQueue.async() {
+            rawData = ResponseHandler().getData(url: weatherUrl) {
+                (rawData) in
+                weather = weatherParser.currentWeather(entry: rawData as AnyObject)
+                print(weather?.temperature)
+            } as AnyObject
         }
-        )
-        print("temp outside callback is \(currentWeather.temperature)")
-        return currentWeather
+        
+        if (rawData != nil) {
+            weather = weatherParser.currentWeather(entry: rawData!)
+        }
+        else {
+            print("rawData is nil")
+        }
+        print("function returned")
+        print("object temperature is \(String(describing: weather?.temperature))")
+        return weather
     }
 }

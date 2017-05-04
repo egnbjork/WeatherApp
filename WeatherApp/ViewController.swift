@@ -13,10 +13,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let currentWeather = CurrentWeatherCustomCity().getCurrentWeather { (weather) in
-            print("current temp is \(weather.temperature)")
-        }
-//        print("Now is \(String(describing: currentWeather.temperature)) ºC")
+        print("viewController started")
+        _ = CurrentWeatherCustomCity().getCurrentWeather()
+        print("viewController finished")
     }
 
     override func didReceiveMemoryWarning() {

@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ModelMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-WeatherApp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,7 +27,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>62959960BC8C5B337A9DB0E05FF98CB8</key>
+		<key>2AA26D08611C7421F2896DF1C17F7833</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -32,7 +37,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EEFED96273E3FE8726130799391E1EAA</key>
+		<key>C47F8E8F0047BF622604172B62FF4788</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FBCC69D7C794145A1D1F84A3164E6083</key>
 		<dict>
 			<key>primary</key>
 			<true/>
