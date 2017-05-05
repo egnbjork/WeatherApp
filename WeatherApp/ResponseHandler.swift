@@ -12,23 +12,27 @@ import SwiftyJSON
 
 class ResponseHandler {
     
-    func getData(url: OpenWeatherURL, completion: @escaping (AnyObject) -> Void) {
-        
+    func getData(url: OpenWeatherURL) -> AnyObject {
+        let queue = DispatchQueue(label: "WeatherJson")
         let group = DispatchGroup()
         group.enter()
-        
         print("ResponseHandler.getData() invoked")
-        Alamofire.request(url.getURL())
-            .responseJSON {
+        let result = Alamofire.request(url.getURL())
+            .responseJSON(queue: queue) {
                 response in
-                if let entry = response.result.value {
-                    completion(entry as AnyObject)
-                    print("getData request() body")
+                    print("=====download started")
+                    if let entry = response.result.value {
+//                        completion(entry as AnyObject)
+                                print(("getCurrentWeather() \(Thread.current)"))
+                        print("getData request() body")
+
                 }
             group.leave()
         }
+        print(("getDate thread is \(Thread.current)"))
         print("alamofire waiting")
         group.wait()
-        print("alamofire finished")
+        print("=====alamofire finished")
+        return result
     }
 }

@@ -16,23 +16,35 @@ class CurrentWeatherCustomCity {
         let weatherParser = WeatherParser()
         var weather: Weather?
         var rawData: AnyObject?
-        let weatherQueue = DispatchQueue(label: "com.berberyan.weatherQueue")
         
-        weatherQueue.async() {
-            rawData = ResponseHandler().getData(url: weatherUrl) {
-                (rawData) in
-                weather = weatherParser.currentWeather(entry: rawData as AnyObject)
-                print(weather?.temperature)
-            } as AnyObject
-        }
+//        let weatherQueue = OperationQueue()
+//        weatherQueue.maxConcurrentOperationCount = 1
         
-        if (rawData != nil) {
-            weather = weatherParser.currentWeather(entry: rawData!)
-        }
-        else {
-            print("rawData is nil")
-        }
-        print("function returned")
+//        weatherQueue.addOperation {
+            print("=====first operation")
+            rawData = ResponseHandler().getData(url: weatherUrl)
+            print("=====first operation finished")
+
+
+//        }
+        
+//        weatherQueue.addOperation {
+            print("=====second operation")
+
+            if (rawData != nil) {
+                weather = weatherParser.currentWeather(entry: rawData!)
+            }
+            else {
+                print("rawData is nil")
+            }
+            
+            print("=====second operation finished")
+//        }
+        
+//        print(("getCurrentWeather() \(Thread.callStackSymbols)"))
+        
+//            weatherQueue.waitUntilAllOperationsAreFinished()
+
         print("object temperature is \(String(describing: weather?.temperature))")
         return weather
     }
