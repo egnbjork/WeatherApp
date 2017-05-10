@@ -7,22 +7,27 @@
 //
 
 import Foundation
+import Mapper
 
-public class Weather {
-    var main: String?
-    var name: String?
-    var description: String?
-    var base: String?
-    var pressure: Double?
-    var humidity: Int?
-    var visibility: Int?
-    var clouds: Int?
-    var date: Date?
-    var sunrise: Date?
-    var sunset: Date?
-    var wind: Wind?
+public class Weather: Mappable {
+//    var main: String?
+//    var name: String?
+//    var description: String?
+//    var base: String?
+//    var pressure: Double?
+//    var humidity: Int?
+//    var visibility: Int?
+//    var clouds: Int?
+//    var date: Date?
+//    var sunrise: Date?
+//    var sunset: Date?
+//    var wind: Wind?
     var temperature: Double?
-    var temperatureMax: Double?
-    var temperatureMin: Double?
-//    var city:City? //not implemented
+//    var temperatureMax: Double?
+//    var temperatureMin: Double?
+//    var city:City? 
+
+    public required init(map: Mapper) throws {
+        try temperature = map.from("main.temp")
+    }
 }
