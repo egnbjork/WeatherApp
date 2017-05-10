@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class ResponseHandler {
     
-    func getData(url: OpenWeatherURL) -> AnyObject {
+    func getData(url: OpenWeatherURL) -> AnyObject? {
         let queue = DispatchQueue(label: "com.berberyan.ResponseHandler")
         let group = DispatchGroup()
         group.enter()
@@ -26,6 +26,6 @@ class ResponseHandler {
             group.leave()
         }
         group.wait()
-        return data!
+        return data
     }
 }

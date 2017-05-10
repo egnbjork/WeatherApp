@@ -9,7 +9,7 @@
 import Foundation
 
 public class Wind {
-    var direction: String?
-    var force: Int?
+    var direction: Int?
+    var speed: Int?
     
 }
