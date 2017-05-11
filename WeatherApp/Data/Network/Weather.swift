@@ -29,27 +29,27 @@ public class Weather: Mappable {
     private let weatherResponse:[WeatherResponse]
     
     public required init(map: Mapper) throws {
-        try self.temperature = map.from("main.temp")
-        try self.cityName = map.from("name")
-        try pressure = map.from("main.pressure")
-        try humidity = map.from("main.humidity")
-        try visibility = map.from("visibility")
-        try clouds = map.from("clouds.all")
-        try temperatureMax = map.from("main.temp_max")
-        try temperatureMin = map.from("main.temp_min")
+        self.temperature = map.optionalFrom("main.temp")
+        self.cityName = map.optionalFrom("name")
+        pressure = map.optionalFrom("main.pressure")
+        humidity = map.optionalFrom("main.humidity")
+        visibility = map.optionalFrom("visibility")
+        clouds = map.optionalFrom("clouds.all")
+        temperatureMax = map.optionalFrom("main.temp_max")
+        temperatureMin = map.optionalFrom("main.temp_min")
         
-        let sunriseRaw: Int? = try map.from("sys.sunrise")
+        let sunriseRaw: Int? = map.optionalFrom("sys.sunrise")
         if sunriseRaw != nil {
             sunrise = Date(timeIntervalSince1970: TimeInterval(String(sunriseRaw!))!)
         }
-        let sunsetRaw: Int? = try map.from("sys.sunset")
+        let sunsetRaw: Int? = map.optionalFrom("sys.sunset")
         if sunsetRaw != nil {
             sunset = Date(timeIntervalSince1970: TimeInterval(String(sunsetRaw!))!)
         }
         
         self.wind = Wind()
-        try wind.direction = map.from("wind.deg")
-        try wind.speed = map.from("wind.speed")
+        wind.direction = map.optionalFrom("wind.deg")
+        wind.speed = map.optionalFrom("wind.speed")
         
         weatherResponse = map.optionalFrom("weather") ?? []
         main = weatherResponse[0].main
