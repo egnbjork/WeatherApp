@@ -9,12 +9,20 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    var currentWeather:Weather?
+    var currentCityWeather = CurrentWeather()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentWeather = CurrentWeatherCustomCity().getCurrentWeather()
+        updateCurrentWeather()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func updateCurrentWeather() {
+        let currentWeather = currentCityWeather.getCurrentWeather()
         temperatureLabel.text = String(format:"%.0f",((currentWeather?.temperature)! - 273.15)) + "º"
         cityLabel.text = currentWeather?.cityName
         weatherDescriptionLabel.text = currentWeather?.description
@@ -24,11 +32,6 @@ class ViewController: UIViewController {
         dateformatter.dateFormat = "HH:mm"
         sunriseLabel.text = "⬆︎ " + dateformatter.string(from: (currentWeather?.sunrise)!)
         sunsetLabel.text = "⬇︎ " + dateformatter.string(from: (currentWeather?.sunset)!)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBOutlet weak var temperatureLabel: UILabel!
