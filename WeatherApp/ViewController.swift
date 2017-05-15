@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ViewController: UIViewController {
     var currentCityWeather = CurrentWeather()
@@ -14,9 +15,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let path = Bundle.main.path(forResource: "city.list", ofType: "json")
-//        let data = NSData.init(contentsOfFile: path!)
-//        print(data)
+        let path = Bundle.main.path(forResource: "city.list", ofType: "json")
+        let jsonData = try? NSData(contentsOfFile: path!, options: NSData.ReadingOptions.mappedIfSafe)
+        let jsonResult: NSArray = try! JSONSerialization.jsonObject(with: jsonData! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
+        let test = JSON(jsonResult)
+        let cityName:JSON = "Odessa"
+        let country:JSON = "UA"
+        
+        test.filter{(_, entry) in entry["name"] == cityName && entry["country"] == country}
+            .map{(_, entry) -> Void in print(entry) }
         updateCurrentWeather()
     }
 
