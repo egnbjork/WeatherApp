@@ -10,6 +10,5 @@ import Foundation
 
 public class Wind {
     var direction: Int?
-    var speed: Int?
-    
+    var speed:Measurement<UnitSpeed>?
 }

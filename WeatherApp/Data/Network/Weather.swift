@@ -19,24 +19,31 @@ public class Weather: Mappable {
     var clouds: Int?
     var sunrise: Date?
     var sunset: Date?
-    var temperature: Double?
-    var temperatureMax: Double?
-    var temperatureMin: Double?
     var cityName: String?
+    var temperature: Measurement<UnitTemperature>?
+    var temperatureMax: Measurement<UnitTemperature>?
+    var temperatureMin: Measurement<UnitTemperature>?
     var wind: Wind
     var date: Date
 //    var city:City?
     private let weatherResponse:[WeatherResponse]
     
     public required init(map: Mapper) throws {
-        self.temperature = map.optionalFrom("main.temp")
-        self.cityName = map.optionalFrom("name")
+        if let temperatureKelvin:Double = map.optionalFrom("main.temp") {
+            temperature = Measurement(value: temperatureKelvin, unit: UnitTemperature.kelvin)
+        }
+        if let temperatureMaxKelvin:Double = map.optionalFrom("main.temp_max") {
+            temperatureMax = Measurement(value: temperatureMaxKelvin, unit: UnitTemperature.kelvin)
+        }
+        if let temperatureMinKelvin:Double = map.optionalFrom("main.temp_min") {
+            temperatureMin = Measurement(value: temperatureMinKelvin, unit: UnitTemperature.kelvin)
+        }
+        
+        cityName = map.optionalFrom("name")
         pressure = map.optionalFrom("main.pressure")
         humidity = map.optionalFrom("main.humidity")
         visibility = map.optionalFrom("visibility")
         clouds = map.optionalFrom("clouds.all")
-        temperatureMax = map.optionalFrom("main.temp_max")
-        temperatureMin = map.optionalFrom("main.temp_min")
         
         let sunriseRaw: Int? = map.optionalFrom("sys.sunrise")
         if sunriseRaw != nil {
@@ -49,7 +56,10 @@ public class Weather: Mappable {
         
         self.wind = Wind()
         wind.direction = map.optionalFrom("wind.deg")
-        wind.speed = map.optionalFrom("wind.speed")
+        
+        if let speedMps: Double = map.optionalFrom("wind.speed") {
+            wind.speed = Measurement(value:speedMps, unit: UnitSpeed.metersPerSecond)
+        }
         
         weatherResponse = map.optionalFrom("weather") ?? []
         main = weatherResponse[0].main
