@@ -10,6 +10,7 @@ import Foundation
 import Mapper
 
 public class Weather: Mappable {
+    //MARK: public variables
     var main: String?
     var description: String?
     var base: String?
@@ -26,16 +27,16 @@ public class Weather: Mappable {
     var wind: Wind
     var date: Date
 //    var city:City?
-    private let weatherResponse:[WeatherResponse]
     
+    //MARK: initializers
     public required init(map: Mapper) throws {
-        if let temperatureKelvin:Double = map.optionalFrom("main.temp") {
+        if let temperatureKelvin: Double = map.optionalFrom("main.temp") {
             temperature = Measurement(value: temperatureKelvin, unit: UnitTemperature.kelvin)
         }
-        if let temperatureMaxKelvin:Double = map.optionalFrom("main.temp_max") {
+        if let temperatureMaxKelvin: Double = map.optionalFrom("main.temp_max") {
             temperatureMax = Measurement(value: temperatureMaxKelvin, unit: UnitTemperature.kelvin)
         }
-        if let temperatureMinKelvin:Double = map.optionalFrom("main.temp_min") {
+        if let temperatureMinKelvin: Double = map.optionalFrom("main.temp_min") {
             temperatureMin = Measurement(value: temperatureMinKelvin, unit: UnitTemperature.kelvin)
         }
         
@@ -45,13 +46,11 @@ public class Weather: Mappable {
         visibility = map.optionalFrom("visibility")
         clouds = map.optionalFrom("clouds.all")
         
-        let sunriseRaw: Int? = map.optionalFrom("sys.sunrise")
-        if sunriseRaw != nil {
-            sunrise = Date(timeIntervalSince1970: TimeInterval(String(sunriseRaw!))!)
+        if let sunriseRaw: Int = map.optionalFrom("sys.sunrise") {
+            sunrise = Date(timeIntervalSince1970: TimeInterval(String(sunriseRaw))!)
         }
-        let sunsetRaw: Int? = map.optionalFrom("sys.sunset")
-        if sunsetRaw != nil {
-            sunset = Date(timeIntervalSince1970: TimeInterval(String(sunsetRaw!))!)
+        if let sunsetRaw: Int = map.optionalFrom("sys.sunset") {
+            sunset = Date(timeIntervalSince1970: TimeInterval(String(sunsetRaw))!)
         }
         
         self.wind = Wind()
@@ -61,12 +60,18 @@ public class Weather: Mappable {
             wind.speed = Measurement(value:speedMps, unit: UnitSpeed.metersPerSecond)
         }
         
-        weatherResponse = map.optionalFrom("weather") ?? []
-        main = weatherResponse[0].main
-        description = weatherResponse[0].description
         date = Date()
+
+        if let weatherResponse:[WeatherResponse] = map.optionalFrom("weather") {
+            if !weatherResponse.isEmpty {
+                main = weatherResponse[0].main
+                description = weatherResponse[0].description
+
+            }
+        }
     }
     
+    //MARK: nested helper class
     private class WeatherResponse: Mappable {
         var main: String?
         var description: String?
