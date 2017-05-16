@@ -14,17 +14,21 @@ public class CityModel {
     var latitude: Double
     var longtitude: Double
     var name: String
-    var user: UserModel
-    var currentWeather: Weather?
-    var forecast: [Weather]?
     
-    init (city: City, user: UserModel){
+    init(countryCode: String, cityName: String, id: Int64, latitude: Double, longtitude: Double) {
+        self.countryCode = countryCode
+        self.name = cityName
+        self.id = id
+        self.latitude = latitude
+        self.longtitude = longtitude
+    }
+    
+    init (city: City){
         self.countryCode = city.country_code
         self.id = city.id
         self.latitude = city.latitude
         self.longtitude = city.longtitude
         self.name = city.name
-        self.user = user
     }
     
 }

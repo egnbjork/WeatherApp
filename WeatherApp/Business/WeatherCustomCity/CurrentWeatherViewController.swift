@@ -25,14 +25,11 @@ class CurrentWeatherViewController: UIViewController {
         updateCurrentWeatherLabels()
 
         DispatchQueue.global().async {
-        let path = Bundle.main.path(forResource: "city.list", ofType: "json")
-        let jsonData = try? NSData(contentsOfFile: path!, options: NSData.ReadingOptions.mappedIfSafe)
-        let jsonResult: NSArray = try! JSONSerialization.jsonObject(with: jsonData! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
-        let test = JSON(jsonResult)
+        let cityHandler = CityHandler()
+        var json = cityHandler.readCityJson()
         let cityName:JSON = "Odessa"
         let country:JSON = "UA"
-        
-        test.filter{(_, entry) in entry["name"] == cityName && entry["country"] == country}
+        json.filter{(_, entry) in entry["name"] == cityName && entry["country"] == country}
             .map{(_, entry) -> Void in print(entry) }
         }
     }

@@ -26,7 +26,7 @@ public class Weather: Mappable {
     var temperatureMin: Measurement<UnitTemperature>?
     var wind: Wind
     var date: Date
-//    var city:City?
+    var city:City?
     
     //MARK: initializers
     public required init(map: Mapper) throws {
