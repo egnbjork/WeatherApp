@@ -12,20 +12,38 @@ import SwiftyJSON
 
 class ResponseHandler {
     
-    func getData(url: OpenWeatherURL) -> AnyObject? {
+    func getJSON(url: OpenWeatherURL) -> JSON? {
         let queue = DispatchQueue(label: "com.berberyan.ResponseHandler")
         let group = DispatchGroup()
         group.enter()
-        var data:AnyObject?
+        var data:JSON?
         Alamofire.request(url.getURL())
             .responseJSON(queue: queue) {
                 response in
-                    if let json = response.result.value {
-                        data = Weather.from(json as! NSDictionary)
+                    if let json = response.result.value as? JSON {
+                        data = json
                 }
             group.leave()
         }
         group.wait()
         return data
     }
+    
+    func getNSDictionary(url: OpenWeatherURL) -> NSDictionary? {
+        let queue = DispatchQueue(label: "com.berberyan.ResponseHandler")
+        let group = DispatchGroup()
+        group.enter()
+        var data:NSDictionary?
+        Alamofire.request(url.getURL())
+            .responseJSON(queue: queue) {
+                response in
+                if let json = response.result.value as? NSDictionary {
+                    data = json
+                }
+                group.leave()
+        }
+        group.wait()
+        return data
+    }
+
 }

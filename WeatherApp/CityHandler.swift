@@ -12,11 +12,15 @@ import SwiftyJSON
 class CityHandler {
     //TODO: sync json file, extract array of citymodels
     
-    func readCityJson() -> JSON {
+    func readCityJson() -> JSON? {
         let path = Bundle.main.path(forResource: "city.list", ofType: "json")
         let jsonData = try? NSData(contentsOfFile: path!, options: NSData.ReadingOptions.mappedIfSafe)
-        let jsonResult: NSArray = try! JSONSerialization.jsonObject(with: jsonData! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
-        return JSON(jsonResult)
+        if let jsonResult = try? JSONSerialization.jsonObject(with: jsonData! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) {
+            return JSON(jsonResult)
+        }
+        else {
+            return nil
+        }
     }
     
     //TODO: sync array to db

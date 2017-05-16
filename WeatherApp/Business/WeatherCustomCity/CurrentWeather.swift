@@ -85,7 +85,8 @@ class CurrentWeather {
     func getCurrentWeather() -> Weather? {
         let weatherUrl = OpenWeatherURL()
         if(shouldUpdate()) {
-            currentWeather = ResponseHandler().getData(url: weatherUrl) as? Weather
+            currentWeather = WeatherHandler().getWeather(url: weatherUrl)
+            
         }
         return currentWeather
     }
