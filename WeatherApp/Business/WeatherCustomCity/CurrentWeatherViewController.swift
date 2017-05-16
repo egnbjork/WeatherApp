@@ -23,10 +23,14 @@ class CurrentWeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateCurrentWeatherLabels()
-
         DispatchQueue.global().async {
-        let cityHandler = CityHandler()
-        cityHandler.getCitiesFromStorage()
+            let cityHandler = CityHandler()
+//            _ = cityHandler.syncDb()
+            var entries = cityHandler.getAllCities()
+//            for i in 0 ..< entries!.count {
+//                print("\(i) \(entries![i].value(forKey: "name")!)")
+//            }
+            print("total \(entries?.count) entries in db")
         }
     }
 

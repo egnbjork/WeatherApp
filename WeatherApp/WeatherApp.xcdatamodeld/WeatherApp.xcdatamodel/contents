@@ -27,9 +27,6 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="EIS" representedClassName="EIS" syncable="YES" codeGenerationType="class">
-        <attribute name="test" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-    </entity>
     <entity name="ExtremeWeather" representedClassName="ExtremeWeather" syncable="YES">
         <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="temp_max" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -64,6 +61,5 @@
         <element name="ExtremeWeather" positionX="99" positionY="272" width="128" height="135"/>
         <element name="Settings" positionX="-180" positionY="162" width="128" height="165"/>
         <element name="User" positionX="-200" positionY="-48" width="128" height="105"/>
-        <element name="EIS" positionX="-54" positionY="90" width="128" height="60"/>
     </elements>
 </model>

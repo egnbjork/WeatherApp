@@ -8,14 +8,34 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 class CityHandler {
-    //TODO: sync json file, extract array of citymodels
     
-    func getCitiesFromStorage() -> [CityModel]? {
-        let json = readCityJson()
-        var cities = [CityModel]()
+    func getAllCities() -> [NSManagedObject]? {
+        var cities:[NSManagedObject] = []
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
         
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "City")
+        
+        do {
+            cities = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print(error)
+        }
+        
+        return cities
+    }
+    
+    func syncDb() {
+        let json = readCityJson()
+        print("total \(json?.count) intries in json")
+        var start = Date()
+
         for i in  0 ..< json!.count {
             let countryCode = String(describing: json![i]["country"])
             let cityName = String(describing: json![i]["name"])
@@ -23,15 +43,18 @@ class CityHandler {
             let latitude = Double(String(describing: json![i]["coord"]["lat"]))!
             let longtitude = Double(String(describing: json![i]["coord"]["lon"]))!
             let city = CityModel(countryCode: countryCode, cityName: cityName, id: id, latitude: latitude, longtitude: longtitude)
-            cities.append(city)
-            print(countryCode)
-            print(cityName)
-            print(id)
-            print(latitude)
-            print(longtitude)
-            print(json![i])
+//            print(i)
+//            print(countryCode)
+//            print(cityName)
+//            print(id)
+//            print(latitude)
+//            print(longtitude)
+//            print(json![i])
+            importToDb(cityModel: city)
         }
-        return cities
+        print(start)
+        print(Date())
+        print("finished")
     }
     
     private func readCityJson() -> JSON? {
@@ -46,6 +69,28 @@ class CityHandler {
     }
     
     //TODO: sync array to db
+    private func importToDb(cityModel: CityModel) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "City", in: managedContext)!
+        
+        let city = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        city.setValue(cityModel.id, forKey: "id")
+        city.setValue(cityModel.countryCode, forKey: "country_code")
+        city.setValue(cityModel.name, forKey: "name")
+        city.setValue(cityModel.latitude, forKey: "latitude")
+        city.setValue(cityModel.longtitude, forKey: "longtitude")
+
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print(error)
+        }
+    }
     
     //TODO: get city id of particular name
     //check in db first
