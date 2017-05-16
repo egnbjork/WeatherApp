@@ -44,6 +44,7 @@ class ResponseHandler {
         }
         group.wait()
         return data
+//        return getJSON(url: url)?.dictionary as! NSDictionary
     }
 
 }

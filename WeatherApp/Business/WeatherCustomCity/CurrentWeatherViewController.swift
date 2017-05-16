@@ -26,11 +26,7 @@ class CurrentWeatherViewController: UIViewController {
 
         DispatchQueue.global().async {
         let cityHandler = CityHandler()
-        var json = cityHandler.readCityJson()
-        let cityName:JSON = "Odessa"
-        let country:JSON = "UA"
-        json?.filter{(_, entry) in entry["name"] == cityName && entry["country"] == country}
-            .map{(_, entry) -> Void in print(entry) }
+        cityHandler.getCitiesFromStorage()
         }
     }
 
