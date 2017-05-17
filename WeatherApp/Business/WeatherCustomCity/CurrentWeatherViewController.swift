@@ -23,6 +23,8 @@ class CurrentWeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateCurrentWeatherLabels()
+        let city = CityHandler().getCity(cityName: "Odessa", countryCode: "UA")
+        print(city!.name)
     }
 
     //TODO:
