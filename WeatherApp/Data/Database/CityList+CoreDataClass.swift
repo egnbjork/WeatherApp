@@ -1,5 +1,5 @@
 //
-//  User+CoreDataClass.swift
+//  CityList+CoreDataClass.swift
 //  
 //
 //  Created by Yevgen Berberyan on 5/17/17.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(User)
-public class User: NSManagedObject {
+@objc(CityList)
+public class CityList: NSManagedObject {
 
 }

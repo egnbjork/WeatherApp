@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class CityModel {
+public class City {
     var countryCode: String
     var id: Int64
     var latitude: Double
@@ -22,13 +22,4 @@ public class CityModel {
         self.latitude = latitude
         self.longtitude = longtitude
     }
-    
-    init (city: City){
-        self.countryCode = city.country_code
-        self.id = city.id
-        self.latitude = city.latitude
-        self.longtitude = city.longtitude
-        self.name = city.name
-    }
-    
 }

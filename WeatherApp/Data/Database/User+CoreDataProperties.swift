@@ -1,9 +1,9 @@
 //
 //  User+CoreDataProperties.swift
-//  WeatherApp
+//  
 //
-//  Created by Yevgen Berberyan on 4/26/17.
-//  Copyright © 2017 Yevgen Berberyan. All rights reserved.
+//  Created by Yevgen Berberyan on 5/17/17.
+//
 //
 
 import Foundation
@@ -18,7 +18,7 @@ extension User {
 
     @NSManaged public var login: String
     @NSManaged public var password: String
-    @NSManaged public var cities: City?
+    @NSManaged public var cities: CityList?
     @NSManaged public var settings: Settings?
 
 }

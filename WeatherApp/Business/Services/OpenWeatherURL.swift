@@ -11,7 +11,7 @@ import Foundation
 class OpenWeatherURL {
     var baseURL: String
     let APPID: String
-    var city: CityModel? //not implemented (remove Optional)
+    var city: City? //not implemented (remove Optional)
     
 //    init(city: CityModel) { //not implemented
 //        self.city = city //not implemented
