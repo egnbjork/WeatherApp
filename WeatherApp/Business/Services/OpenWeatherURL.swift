@@ -11,18 +11,15 @@ import Foundation
 class OpenWeatherURL {
     var baseURL: String
     let APPID: String
-    var city: City? //not implemented (remove Optional)
+    var city: City
     
-//    init(city: CityModel) { //not implemented
-//        self.city = city //not implemented
-    init() { //remove
+    init(city: City) {
+        self.city = city
         baseURL = "http://api.openweathermap.org/data/2.5/weather"
         APPID = "1237fcee037ac052bf06aad869f9f17a"
     }
     
     func getURL() -> String {
-       return "\(baseURL)?id=698740&APPID=\(APPID)" //remove
-        
-//        return "\(baseURL)?id=\(city.id)&APPID=\(APPID)" //not implemented
+        return "\(baseURL)?id=\(city.id)&APPID=\(APPID)"
     }
 }

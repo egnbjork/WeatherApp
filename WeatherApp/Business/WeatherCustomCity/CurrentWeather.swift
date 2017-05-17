@@ -12,10 +12,12 @@ class CurrentWeather {
 
     private var currentWeather: Weather?
     let dateformatter:DateFormatter
+    let city:City
 
-    init() {
+    init(city: City) {
         dateformatter = DateFormatter()
         dateformatter.dateFormat = "HH:mm"
+        self.city = city
         _ = getCurrentWeather()
     }
     
@@ -83,7 +85,7 @@ class CurrentWeather {
     }
     
     func getCurrentWeather() -> Weather? {
-        let weatherUrl = OpenWeatherURL()
+        let weatherUrl = OpenWeatherURL(city: city)
         if(shouldUpdate()) {
             currentWeather = WeatherHandler().getWeather(url: weatherUrl)
             

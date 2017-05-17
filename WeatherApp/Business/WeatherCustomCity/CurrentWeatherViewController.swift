@@ -22,9 +22,15 @@ class CurrentWeatherViewController: UIViewController {
     //MARK: Controller methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateCurrentWeatherLabels()
-        let city = CityHandler().getCity(cityName: "Odessa", countryCode: "UA")
-        print(city!.name)
+        
+        if let city = CityHandler().getCity(cityName: "Odessa", countryCode: "UA") {
+            let currentWeather = CurrentWeather(city: city)
+            updateCurrentWeatherLabels(currentWeather: currentWeather)
+            print(city.name)
+        }
+        else {
+            print("cannot acquire current weather")
+        }
     }
 
     //TODO:
@@ -34,9 +40,7 @@ class CurrentWeatherViewController: UIViewController {
     }
     
     //MARK: helper methods
-    private func updateCurrentWeatherLabels() {
-        let currentWeather = CurrentWeather()
-        
+    private func updateCurrentWeatherLabels(currentWeather: CurrentWeather) {
         temperatureLabel.text = currentWeather.getTemperature()
         humidityLabel.text = currentWeather.getHumidity()
         pressureLabel.text = currentWeather.getPressure()
