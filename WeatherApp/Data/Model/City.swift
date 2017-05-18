@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Mapper
 
-public class City {
+public class City: Mappable {
     var countryCode: String
     var id: Int64
     var latitude: Double
@@ -21,5 +22,14 @@ public class City {
         self.id = id
         self.latitude = latitude
         self.longtitude = longtitude
+    }
+    
+    public required init(map: Mapper) throws {
+        name = try map.from("name")
+        countryCode = try map.from("country")
+        latitude = try map.from("coord.lat")
+        longtitude = try map.from("coord.lon")
+        let idMapping:Int = try map.from("id")
+        id = Int64(idMapping)
     }
 }

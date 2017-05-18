@@ -13,19 +13,31 @@ class CityHandler {
     private var json:JSON?
     
     func getCity(cityName: String, countryCode: String) -> City? {
+        return getCityFromStorage(cityName: cityName, countryCode: countryCode)
+    }
+    
+    //TODO: for location search
+    func getCity(latitude: Double, longtitude: Double) -> City? {
+        return nil
+    }
+    
+    //MARK: Storage operations
+    private func getCityFromStorage(cityName: String, countryCode: String) ->City? {
         json = parseCityJson()
         let city = json?.filter{
             (_, entry) in entry["name"] == JSON(cityName) && entry["country"] == JSON(countryCode)
             }
             .map{
-                (_, entry) -> City in
-                return
-                    City(countryCode: String(describing: entry["country"]),
-                         cityName: String(describing: entry["name"]),
-                         id: Int64(String(describing: entry["id"]))!,
-                         latitude: Double(String(describing: entry["coord"]["lat"]))!,
-                         longtitude: Double(String(describing: entry["coord"]["lon"]))!)
-            }
+                (_, entry) -> City? in
+                if entry.dictionaryObject != nil {
+                    let nsDict:NSDictionary = entry.dictionaryObject! as NSDictionary
+                    return City.from(nsDict)
+                } else {
+                    print("cannot parse city list")
+                    return nil
+                }
+        }
+        
         if city == nil {
             print("no city found")
         }
@@ -34,11 +46,7 @@ class CityHandler {
         else {
             return city?[0]
         }
-        return nil
-    }
-    
-    //TODO: for location search
-    func getCity(latitude: Double, longtitude: Double) -> City? {
+        
         return nil
     }
     
@@ -46,7 +54,8 @@ class CityHandler {
         let path = Bundle.main.path(forResource: "city.list", ofType: "json")
         let jsonData = try? NSData(contentsOfFile: path!, options: NSData.ReadingOptions.mappedIfSafe)
         if let jsonResult = try? JSONSerialization.jsonObject(with: jsonData! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) {
-            return JSON(jsonResult)
+        let json = JSON(jsonResult)
+        return json
         }
         else {
             print("cannot parse json")
