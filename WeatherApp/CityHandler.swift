@@ -8,12 +8,23 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 class CityHandler {
     private var json:JSON?
     
     func getCity(cityName: String, countryCode: String) -> City? {
-        return getCityFromStorage(cityName: cityName, countryCode: countryCode)
+        if let dbCity = getCityFromDb(cityName: cityName, countryCode: countryCode) {
+            return dbCity
+        }
+        
+        guard let city = getCityFromStorage(cityName: cityName, countryCode: countryCode)
+            else {
+                return nil
+        }
+        
+        _ = storeCityToDb(city: city)
+        return city
     }
     
     //TODO: for location search
@@ -21,8 +32,72 @@ class CityHandler {
         return nil
     }
     
+    //MARK: DB operations
+    private func storeCityToDb(city: City) {
+        print("storing in db")
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "CityList", in: managedContext)!
+        
+        let cityListEntry = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        cityListEntry.setValue(city.id, forKey: "id")
+        cityListEntry.setValue(city.countryCode, forKey: "country_code")
+        cityListEntry.setValue(city.name, forKey: "name")
+        cityListEntry.setValue(city.latitude, forKey: "latitude")
+        cityListEntry.setValue(city.longtitude, forKey: "longtitude")
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    private func getCityFromDb(cityName: String, countryCode: String) -> City? {
+        print("fetching from db")
+        var cities:[NSManagedObject] = []
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+            
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CityList")
+        let predicate = NSPredicate(format: "name == %@ AND country_code == %@", cityName, countryCode)
+        fetchRequest.predicate = predicate
+        
+        do {
+            cities = try managedContext.fetch(fetchRequest)
+            print("db cities capacity is \(cities.count)")
+            return managedObjecttoModel(object: cities)
+        } catch let error as NSError {
+            print("error caught")
+            print(error)
+        }
+        print("nothing found")
+        return nil
+    }
+    
+    private func managedObjecttoModel(object: [NSManagedObject]) -> City? {
+        if object.count != 1 {
+            return nil
+        }
+        print("managedObjecttoModel() invoked")
+        print(object.count)
+        let cityName: String = object[0].value(forKey: "name") as! String
+        let countryCode: String = object[0].value(forKey: "country_code") as! String
+        let id: Int64 = object[0].value(forKey: "id") as! Int64
+        let latitude:Double = object[0].value(forKey: "latitude") as! Double
+        let longtitude:Double = object[0].value(forKey: "longtitude") as! Double
+        return City(countryCode: countryCode, cityName: cityName, id: id, latitude: latitude, longtitude: longtitude)
+    }
+    
     //MARK: Storage operations
-    private func getCityFromStorage(cityName: String, countryCode: String) ->City? {
+    private func getCityFromStorage(cityName: String, countryCode: String) -> City? {
         json = parseCityJson()
         let city = json?.filter{
             (_, entry) in entry["name"] == JSON(cityName) && entry["country"] == JSON(countryCode)
@@ -46,7 +121,6 @@ class CityHandler {
         else {
             return city?[0]
         }
-        
         return nil
     }
     
