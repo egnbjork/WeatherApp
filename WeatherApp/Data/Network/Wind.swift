@@ -11,4 +11,10 @@ import Foundation
 public class Wind {
     var direction: Int?
     var speed:Measurement<UnitSpeed>?
+    
+    func setSpeed(speed: Double?) {
+        if speed != nil {
+            self.speed = Measurement(value:speed!, unit: UnitSpeed.metersPerSecond)
+        }
+    }
 }

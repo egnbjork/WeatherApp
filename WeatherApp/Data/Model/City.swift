@@ -30,6 +30,7 @@ public class City: Mappable {
         latitude = try map.from("coord.lat")
         longtitude = try map.from("coord.lon")
         let idMapping:Int = try map.from("id")
+        
         id = Int64(idMapping)
     }
 }
