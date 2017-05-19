@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import CoreLocation
 
 class CurrentWeatherViewController: UIViewController {
     @IBOutlet weak var humidityLabel: UILabel!
@@ -18,11 +19,17 @@ class CurrentWeatherViewController: UIViewController {
     @IBOutlet weak var sunsetLabel: UILabel!
     @IBOutlet weak var sunriseLabel: UILabel!
     @IBOutlet weak var windSpeedLabel: UILabel!
+    
+    var location: LocationHandler?
 
     //MARK: Controller methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        reloadData(msg: "===called from viewDidLoad()===")
+        location = LocationHandler.sharedInstance
+        location?.setUp(delegate: self)
+
         if let city = CityHandler().getCity(cityName: "Odessa", countryCode: "UA") {
             let currentWeather = CurrentWeather(city: city)
             updateCurrentWeatherLabels(currentWeather: currentWeather)
@@ -40,6 +47,7 @@ class CurrentWeatherViewController: UIViewController {
     }
     
     //MARK: helper methods
+    
     private func updateCurrentWeatherLabels(currentWeather: CurrentWeather) {
         temperatureLabel.text = currentWeather.getTemperature()
         humidityLabel.text = currentWeather.getHumidity()
@@ -52,3 +60,19 @@ class CurrentWeatherViewController: UIViewController {
     }
 }
 
+protocol CurrentWeatherViewControllerDelegate: class {
+    func reloadData(msg: String)
+}
+
+extension CurrentWeatherViewController: CurrentWeatherViewControllerDelegate {
+    func reloadData(msg: String) {
+        print("latitude is \(String(describing: location?.latitude))")
+        print("longtitude is \(String(describing: location?.longtitude))")
+        print(msg)
+        if location?.latitude != nil && location?.longtitude != nil {
+            if let city = CityHandler().getCity(latitude: (location?.latitude)!, longtitude: (location?.longtitude)!) {
+                    print(city.name!)
+            }
+        }
+    }
+}

@@ -30,6 +30,17 @@ class CityHandler {
     
     //TODO: for location search
     func getCity(latitude: Double, longtitude: Double) -> City? {
+        if let dbCity = getCityFromDb(latitude: latitude, longtitude: longtitude) {
+            return dbCity
+        }
+        
+//        guard let city = getCityFromStorage(latitude: Double, longtitude: Double)
+//            else {
+//                return nil
+//        }
+        
+//        _ = storeCityToDb(city: city)
+//        return city
         return nil
     }
     
@@ -69,6 +80,38 @@ class CityHandler {
             
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CityList")
         let predicate = NSPredicate(format: "name == %@ AND country_code == %@", cityName, countryCode)
+        fetchRequest.predicate = predicate
+        
+        do {
+            cities = try managedContext.fetch(fetchRequest)
+            print("db cities size is \(cities.count)")
+            return managedObjecttoModel(object: cities)
+        } catch let error as NSError {
+            print("error caught")
+            print(error)
+        }
+        print("nothing found")
+        return nil
+    }
+    
+    private func getCityFromDb(latitude: Double, longtitude: Double) -> City? {
+        print("fetching from db (coord)")
+        var cities:[NSManagedObject] = []
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let latStringMin = String(format: "%.2f", (latitude - 0.05))
+        let lonStringMin = String(format: "%.2f", (longtitude - 0.05))
+        
+        let latStringMax = String(format: "%.3f", (latitude + 0.05))
+        let lonStringMax = String(format: "%.3f", (longtitude + 0.05))
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CityList")
+//        print("cityHanler latitude is \(String(latStringMin)) and longtitude is \(lonStringMin)")
+        let predicate = NSPredicate(format: "latitude >= %f AND latitude <= %f AND longtitude >= %f AND longtitude <= %f", latStringMin, latStringMax, lonStringMin, lonStringMax)
         fetchRequest.predicate = predicate
         
         do {
