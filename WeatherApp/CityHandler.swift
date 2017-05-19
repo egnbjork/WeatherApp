@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import ObjectMapper
 import CoreData
 
 class CityHandler {
@@ -44,7 +45,7 @@ class CityHandler {
         
         let cityListEntry = NSManagedObject(entity: entity, insertInto: managedContext)
         
-        cityListEntry.setValue(city.id, forKey: "id")
+        cityListEntry.setValue(city.cityId, forKey: "id")
         cityListEntry.setValue(city.countryCode, forKey: "country_code")
         cityListEntry.setValue(city.name, forKey: "name")
         cityListEntry.setValue(city.latitude, forKey: "latitude")
@@ -72,7 +73,7 @@ class CityHandler {
         
         do {
             cities = try managedContext.fetch(fetchRequest)
-            print("db cities capacity is \(cities.count)")
+            print("db cities size is \(cities.count)")
             return managedObjecttoModel(object: cities)
         } catch let error as NSError {
             print("error caught")
@@ -105,8 +106,7 @@ class CityHandler {
             .map{
                 (_, entry) -> City? in
                 if entry.dictionaryObject != nil {
-                    let nsDict:NSDictionary = entry.dictionaryObject! as NSDictionary
-                    return City.from(nsDict)
+                    return Mapper<City>().map(JSON: entry.dictionaryObject!)
                 } else {
                     print("cannot parse city list")
                     return nil

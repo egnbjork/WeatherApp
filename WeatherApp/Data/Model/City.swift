@@ -7,30 +7,36 @@
 //
 
 import Foundation
-import Mapper
+import ObjectMapper
 
 public class City: Mappable {
-    var countryCode: String
-    var id: Int64
-    var latitude: Double
-    var longtitude: Double
-    var name: String
+    var countryCode: String?
+    var cityId: Int64?
+    var latitude: Double?
+    var longtitude: Double?
+    var name: String?
     
     init(countryCode: String, cityName: String, id: Int64, latitude: Double, longtitude: Double) {
         self.countryCode = countryCode
         self.name = cityName
-        self.id = id
+        self.cityId = id
         self.latitude = latitude
         self.longtitude = longtitude
     }
     
-    public required init(map: Mapper) throws {
-        name = try map.from("name")
-        countryCode = try map.from("country")
-        latitude = try map.from("coord.lat")
-        longtitude = try map.from("coord.lon")
-        let idMapping:Int = try map.from("id")
+    public required init?(map: Map) {
+    }
+    
+    public func mapping(map: Map) {
+        name <- map["name"]
+        countryCode <- map["country"]
+        latitude <- map["coord.lat"]
+        longtitude <- map["coord.lon"]
+        var idMapping:Int?
+        idMapping <- map["id"]
+        if(idMapping != nil) {
+            cityId = Int64(idMapping!)
+        }
         
-        id = Int64(idMapping)
     }
 }

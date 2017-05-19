@@ -9,21 +9,24 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import AlamofireObjectMapper
+import ObjectMapper
 
 class ResponseHandler {
     
-    func getData(url: OpenWeatherURL) -> NSDictionary? {
+    func getData<T:BaseMappable>(url: OpenWeatherURL) -> T? {
         let queue = DispatchQueue(label: "com.berberyan.ResponseHandler")
         let group = DispatchGroup()
         group.enter()
-        var data:NSDictionary?
-        Alamofire.request(url.getURL())
-            .responseJSON(queue: queue) {
-                response in
-                if let json = response.result.value as? NSDictionary {
-                    data = json
+        var data:T?
+        Alamofire.request(url.getURL()).responseObject(queue: queue) {
+            (response: DataResponse<T>) in
+                if let fetchedResponse = response.result.value {
+                    data = fetchedResponse
+                } else {
+                    print ("can't fetch the result")
                 }
-                group.leave()
+            group.leave()
         }
         group.wait()
         return data

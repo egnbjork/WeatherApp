@@ -20,6 +20,6 @@ class OpenWeatherURL {
     }
     
     func getURL() -> String {
-        return "\(baseURL)?id=\(city.id)&APPID=\(APPID)"
+        return "\(baseURL)?id=\(city.cityId!)&APPID=\(APPID)"
     }
 }

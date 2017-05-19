@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Mapper
+import ObjectMapper
 
 public class Weather: Mappable {
     //MARK: public variables
@@ -28,24 +28,34 @@ public class Weather: Mappable {
     var date: Date
     var city:City?
     
-    //MARK: initializers
-    public required init(map: Mapper) throws {
+    public required init?(map: Map) {
         self.wind = Wind()
         date = Date()
-
-        cityName = map.optionalFrom("name")
-        pressure = map.optionalFrom("main.pressure")
-        humidity = map.optionalFrom("main.humidity")
-        visibility = map.optionalFrom("visibility")
-        clouds = map.optionalFrom("clouds.all")
-        wind.direction = map.optionalFrom("wind.deg")
+    }
+    
+    public func mapping(map: Map) {
+        cityName <- map["name"]
+        pressure <- map["main.pressure"]
+        humidity <- map["main.humidity"]
+        visibility <- map["visibility"]
+        clouds <- map["clouds.all"]
+        main <- map["weather.0.main"]
+        description <- map["weather.0.description"]
+        wind.direction <- map["wind.deg"]
         
-        let windSpeedRaw: Double? = map.optionalFrom("wind.speed")
-        let temperatureRaw: Double? = map.optionalFrom("main.temp")
-        let temperatureMaxRaw: Double? = map.optionalFrom("main.temp_max")
-        let temperatureMinRaw: Double? = map.optionalFrom("main.temp_min")
-        let sunriseRaw: Int? = map.optionalFrom("sys.sunrise")
-        let sunsetRaw: Int? = map.optionalFrom("sys.sunset")
+        var windSpeedRaw: Double?
+        var temperatureRaw: Double?
+        var temperatureMaxRaw: Double?
+        var temperatureMinRaw: Double?
+        var sunriseRaw: Int?
+        var sunsetRaw: Int?
+        
+        windSpeedRaw <- map["wind.speed"]
+        temperatureRaw <- map["main.temp"]
+        temperatureMaxRaw <- map["main.temp_max"]
+        temperatureMinRaw <- map["main.temp_min"]
+        sunriseRaw <- map["sys.sunrise"]
+        sunsetRaw <- map["sys.sunset"]
         
         setTemperature(temperature: temperatureRaw)
         setTemperatureMax(temperatureMax: temperatureMaxRaw)
@@ -54,27 +64,8 @@ public class Weather: Mappable {
         setSunset(sunset: sunsetRaw)
         
         wind.setSpeed(speed: windSpeedRaw)
-                
-        if let weatherResponse:[WeatherResponse] = map.optionalFrom("weather") {
-            if !weatherResponse.isEmpty {
-                main = weatherResponse[0].main
-                description = weatherResponse[0].description
-
-            }
-        }
     }
-    
-    //MARK: nested helper class
-    private class WeatherResponse: Mappable {
-        var main: String?
-        var description: String?
         
-        required init(map: Mapper) throws {
-            try main = map.from("main")
-            try description = map.from("description")
-        }
-    }
-    
     //MARK: private setters
     private func setTemperature(temperature: Double?) {
         if temperature != nil {

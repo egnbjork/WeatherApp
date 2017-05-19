@@ -26,7 +26,7 @@ class CurrentWeatherViewController: UIViewController {
         if let city = CityHandler().getCity(cityName: "Odessa", countryCode: "UA") {
             let currentWeather = CurrentWeather(city: city)
             updateCurrentWeatherLabels(currentWeather: currentWeather)
-            print(city.name)
+            print(city.name ?? "Not available")
         }
         else {
             print("cannot acquire current weather")

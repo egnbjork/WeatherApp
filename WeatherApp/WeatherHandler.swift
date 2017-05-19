@@ -10,8 +10,8 @@ import Foundation
 
 class WeatherHandler {
     func getWeather(url: OpenWeatherURL) -> Weather? {
-        if let data = ResponseHandler().getData(url: url) {
-            return Weather.from(data)
+        if let data: Weather = ResponseHandler().getData(url: url) {
+            return data
         }
         return nil
     }
